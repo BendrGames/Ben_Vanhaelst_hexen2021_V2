@@ -27,8 +27,14 @@ namespace DAE.Gamesystem
         public GameObject hex;
         public GenerationShapes MapShape = GenerationShapes.Hexagon;
 
-        private Grid<Hex> _grid;
-        private Board<Hex, Piece> _board;
+        public Deck _deckview;
+        public PlayerHand _playerhand;
+        private ActionManager<Card, Piece> _actionManager;        
+
+        public Card _currentCard;
+
+        private Grid<IHex> _grid;
+        private Board<IHex, Piece> _board;
 
         public Piece Player;
 
@@ -39,15 +45,34 @@ namespace DAE.Gamesystem
             _positionHelper.TileRadius = Tileradius;
             _generateboard.GenerateBoardView(Rows, Columns, 1, MapShape, _positionHelper, hex, _boardParent);
 
-            _grid = new Grid<Hex>(Rows, Columns);
+            _grid = new Grid<IHex>(Rows, Columns);
             ConnectGrid(_grid);
-            _board = new Board<Hex, Piece>();
+            _board = new Board<IHex, Piece>();
             ConnectPiece(_grid, _board);
-
+            _actionManager = new ActionManager<Card, Piece>(_board, _grid);
             var replayManager = new ReplayManager();
+
+            _playerhand.InitializePlayerHand(_deckview, 5);
+            DrawCard();
+            DrawCard();
+            DrawCard();
+            DrawCard();
+            DrawCard();
 
             BoardListereners();
         }
+
+       
+
+        private void DrawCard()
+        {
+            var card = _playerhand.Drawcard();
+            card.BeginDrag += (s, e) =>
+            {
+                _currentCard = e.Card;
+            };
+        }
+
 
         private void BoardListereners()
         {
@@ -80,68 +105,67 @@ namespace DAE.Gamesystem
             };
         }
 
-        private void ConnectGrid(Grid<Hex> grid)
+        private void ConnectGrid(Grid<IHex> grid)
         {
             var hexes = FindObjectsOfType<Hex>();
             foreach (var hex in hexes)
             {
-                
-                //hex.Dropped += (s, e) =>
-                //{
-                //    var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, CurrentCard._cardType);
 
-                //    if (validpositions.Contains(e.Position))
-                //    {
-                //        _actionManager.Action(Player, e.Position, CurrentCard._cardType);
+                hex.Dropped += (s, e) =>
+                {
+                    var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
 
-                //        DrawCard();
-                //    }
-                //    else
-                //    {
-                //        //ReAddCard();
-                //    }
+                    if (validpositions.Contains(e.Position))
+                    {
+                        _actionManager.Action(Player, e.Position, _currentCard._cardType);
 
-                //    foreach (var position in validpositions)
-                //    {
-                //        position.Deactivate();
-                //    }
+                        DrawCard();
+                    }
+                    else
+                    {
+                        //ReAddCard();
+                    }
 
-                //};
+                    foreach (var position in validpositions)
+                    {
+                        position.Deactivate();
+                    }
 
-                //hex.Entered += (s, e) =>
-                //{
-                //    var positions = _actionManager.ValidPisitionsFor(Player, e.Position, CurrentCard._cardType);
+                };
 
-                //    _currentMousePosition = e.Position;
-                //    Debug.Log(_currentMousePosition);
+                hex.Entered += (s, e) =>
+                {
+                    var positions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
 
-                //    foreach (var position in positions)
-                //    {
-                //        position.Activate();
-                //    }
-                //};
+                    //_currentMousePosition = e.Position;
+                    //Debug.Log(_currentMousePosition);
 
-                //hex.Exitted += (s, e) =>
-                //{
-                //    var positions = _actionManager.ValidPisitionsFor(Player, e.Position, CurrentCard._cardType);
+                    foreach (var position in positions)
+                    {
+                        position.Activate();
+                    }
+                };
 
-                //    foreach (var position in positions)
-                //    {
-                //        position.Deactivate();
-                //    }
-                //};
+                hex.Exitted += (s, e) =>
+                {
+                    var positions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
 
-                
+                    foreach (var position in positions)
+                    {
+                        position.Deactivate();
+                    }
+                };
+
+
                 var gridpos = _positionHelper.ToGridPosition(_boardParent, hex.transform.position);
-                Debug.Log($"value of tile { hex.name} is X: {(int)gridpos.x} and y: {(int)gridpos.y}");
-
+                
                 grid.Register((int)gridpos.x, (int)gridpos.y, hex);
-                Debug.Log($"value of tile { hex.name} is X: {(int)gridpos.x} and y: {(int)gridpos.y}");
+               
                 hex.gameObject.name = $"tile {(int)gridpos.x},{(int)gridpos.y}";
             }
         }
 
-        private void ConnectPiece(Grid<Hex> grid, Board<Hex, Piece> board)
+        private void ConnectPiece(Grid<IHex> grid, Board<IHex, Piece> board)
         {
                 var pieces = FindObjectsOfType<Piece>();
                 foreach (var piece in pieces)

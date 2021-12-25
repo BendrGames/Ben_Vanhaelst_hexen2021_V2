@@ -101,10 +101,7 @@ namespace DAE.Gamesystem
             var handler = Exitted;
             handler?.Invoke(this, eventargs);
         }
-
-    
-
-
+            
         public void Activate()
         {
             OnActivate.Invoke();
@@ -114,7 +111,6 @@ namespace DAE.Gamesystem
         {
             Ondeactivate.Invoke();
         }
-
 
     }
 }

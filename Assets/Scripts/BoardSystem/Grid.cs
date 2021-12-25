@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAE.BoardSystem
 {
-    public class Grid<TPosition>
+    public class Grid<THex>
     {
         public int rows { get; }
         public int columns { get; }
@@ -18,14 +18,14 @@ namespace DAE.BoardSystem
             this.columns = columns;
         }
 
-        private BidirectionalDictionary<(int x, int y), TPosition> _positions = new BidirectionalDictionary<(int x, int y), TPosition>();
+        private BidirectionalDictionary<(int x, int y), THex> _positions = new BidirectionalDictionary<(int x, int y), THex>();
 
-        public bool TryGetPositionAt(int x, int y, out TPosition position) => _positions.TryGetValue((x, y), out position);
+        public bool TryGetPositionAt(int x, int y, out THex position) => _positions.TryGetValue((x, y), out position);
 
-        public bool TryGetCoordinateOf(TPosition position, out (int x, int y) coordinate)
+        public bool TryGetCoordinateOf(THex position, out (int x, int y) coordinate)
             => _positions.TryGetKey(position, out coordinate);
 
-        public void Register(int x, int y, TPosition position)
+        public void Register(int x, int y, THex position)
         {
             _positions.Add((x, y), position);
         }
