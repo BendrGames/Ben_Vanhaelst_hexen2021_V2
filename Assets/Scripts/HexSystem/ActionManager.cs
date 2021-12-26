@@ -32,11 +32,11 @@ namespace DAE.HexSystem
             
             _actions.Add(CardType.Beam, new LaserBeamAction<TCard, TPiece>());
 
-            //_actions.Add(CardType.Thunderclap, new ThunderClapAction<TCard, TPiece>());
+            _actions.Add(CardType.Thunderclap, new ThunderClapAction<TCard, TPiece>());
 
-            //_actions.Add(CardType.Teleport, new TeleportAction<TCard, TPiece>());
+            _actions.Add(CardType.Teleport, new TeleportAction<TCard, TPiece>());
 
-            //_actions.Add(CardType.Cleave, new CleaveAction<TCard, TPiece>());           
+            _actions.Add(CardType.Cleave, new CleaveAction<TCard, TPiece>());
 
 
             //_actions.Add(CardType.Cleave, new ConfigurableAction<TCard, TPiece>((b, g, pos, p, c)
@@ -60,7 +60,15 @@ namespace DAE.HexSystem
         {
             return _actions[cardType]
                 .Where(m => m.CanExecute(_board, _grid, position, piece, cardType))
-                .SelectMany(m => m.ValidPositionsCalc(_board, _grid, position, piece, cardType)/*.Contains(position)*/)
+                .SelectMany(m => m.Validpositions(_board, _grid, position, piece, cardType)/*.Contains(position)*/)
+                .ToList();
+        }
+
+        public List<IHex> IsolatedValidPisitionsFor(TPiece piece, IHex position, CardType cardType)
+        {
+            return _actions[cardType]
+                .Where(m => m.CanExecute(_board, _grid, position, piece, cardType))
+                .SelectMany(m => m.IsolatedPositions(_board, _grid, position, piece, cardType)/*.Contains(position)*/)
                 .ToList();
         }
 
@@ -68,7 +76,7 @@ namespace DAE.HexSystem
         {
             _actions[cardType]
             .Where(m => m.CanExecute(_board, _grid, position, piece, cardType))
-            .First(m => m.ValidPositionsCalc(_board, _grid, position, piece, cardType).Contains(position))
+            .First(m => m.IsolatedPositions(_board, _grid, position, piece, cardType).Contains(position))
             .ExecuteAction(_board, _grid, position, piece, cardType);
         }
        

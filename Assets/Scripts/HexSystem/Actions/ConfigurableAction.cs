@@ -23,8 +23,10 @@ namespace DAE.HexSystem.Actions
         //    => _positionCollector(board, grid, piece);
                 
 
-        public override List<IHex> ValidPositionsCalc(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)
+        public override List<IHex> Validpositions(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)
         => _positionCollector(board, grid, position, piece, card);
-        
+
+        public override List<IHex> IsolatedPositions(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)
+        => _positionCollector(board, grid, position, piece, card);
     }
 }

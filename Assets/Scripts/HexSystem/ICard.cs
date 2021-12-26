@@ -18,6 +18,8 @@ namespace DAE.HexSystem
         CardType CardType { get; }
         Texture2D CardTexture { get; }
 
+        public void Used();
+
 
 
         //bool Click { get; }

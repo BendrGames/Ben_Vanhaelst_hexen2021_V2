@@ -163,7 +163,6 @@ namespace DAE.HexSystem.Actions
 
             return this;
         }
-
         public ActionHelper<TCard, TPiece> TargetedPlusSides(int xOffset, int yOffset, int direction, int numTiles = int.MaxValue, params Validator[] validators)
         {
             List<IHex> TempvalidPositions = new List<IHex>();
@@ -223,8 +222,9 @@ namespace DAE.HexSystem.Actions
             return this;
         }
 
+        #region directionmethods
         internal ActionHelper<TCard, TPiece> TargetedPlusSides(int numTiles = int.MaxValue, params Validator[] validators)
-        => TargetedPlusSides((int)_directions[0].x, (int)_directions[0].y, 0, numTiles, validators);
+     => TargetedPlusSides((int)_directions[0].x, (int)_directions[0].y, 0, numTiles, validators);
         internal ActionHelper<TCard, TPiece> TargetedPlusSides1(int numTiles = int.MaxValue, params Validator[] validators)
          => TargetedPlusSides((int)_directions[1].x, (int)_directions[1].y, 1, numTiles, validators);
         internal ActionHelper<TCard, TPiece> TargetedPlusSides2(int numTiles = int.MaxValue, params Validator[] validators)
@@ -277,7 +277,8 @@ namespace DAE.HexSystem.Actions
         internal ActionHelper<TCard, TPiece> DiagonalDirection5(int numTiles = int.MaxValue, params Validator[] validators)
          => StraightAction((int)_diagonalDirections[5].x, (int)_diagonalDirections[5].y, numTiles, validators);
 
-    
+        #endregion
+
         public Vector2 GetNextDirectionDown(int currentDirection)
         {
 

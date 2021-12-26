@@ -21,7 +21,7 @@ namespace DAE.Gamesystem
         private Transform _boardParent;
 
         [Header("GenerateBoard")]
-        public int Rows = 8;    
+        public int Rows = 8;
         public int Columns = 8;
         public int Tileradius = 1;
         public GameObject hex;
@@ -29,7 +29,7 @@ namespace DAE.Gamesystem
 
         public Deck _deckview;
         public PlayerHand _playerhand;
-        private ActionManager<Card, Piece> _actionManager;        
+        private ActionManager<Card, Piece> _actionManager;
 
         public Card _currentCard;
 
@@ -52,7 +52,8 @@ namespace DAE.Gamesystem
             _actionManager = new ActionManager<Card, Piece>(_board, _grid);
             var replayManager = new ReplayManager();
 
-            _playerhand.InitializePlayerHand(_deckview, 5);
+            _playerhand.InitializePlayerHand(_deckview);
+
             DrawCard();
             DrawCard();
             DrawCard();
@@ -62,7 +63,7 @@ namespace DAE.Gamesystem
             BoardListereners();
         }
 
-       
+
 
         private void DrawCard()
         {
@@ -114,17 +115,15 @@ namespace DAE.Gamesystem
                 hex.Dropped += (s, e) =>
                 {
                     var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
+                    var IsolatedPositions = _actionManager.IsolatedValidPisitionsFor(Player, e.Position, _currentCard._cardType);
 
-                    if (validpositions.Contains(e.Position))
+                    if (IsolatedPositions.Contains(e.Position))
                     {
                         _actionManager.Action(Player, e.Position, _currentCard._cardType);
 
+                        _currentCard.Used();
                         DrawCard();
-                    }
-                    else
-                    {
-                        //ReAddCard();
-                    }
+                    }                  
 
                     foreach (var position in validpositions)
                     {
@@ -135,53 +134,69 @@ namespace DAE.Gamesystem
 
                 hex.Entered += (s, e) =>
                 {
-                    var positions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
+                    var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
+                    var IsolatedPositions = _actionManager.IsolatedValidPisitionsFor(Player, e.Position, _currentCard._cardType);
 
-                    //_currentMousePosition = e.Position;
-                    //Debug.Log(_currentMousePosition);
-
-                    foreach (var position in positions)
+                    if (!validpositions.Contains(e.Position))
                     {
-                        position.Activate();
+                        foreach (var position in validpositions)
+                        {
+                            position.Activate();
+                        }
+                    }
+                    
+                    if (IsolatedPositions.Contains(e.Position))
+                    {
+                        foreach (var position in IsolatedPositions)
+                        {
+                            position.Activate();
+                        }
                     }
                 };
 
                 hex.Exitted += (s, e) =>
                 {
-                    var positions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
+                    var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
+                    var IsolatedPositions = _actionManager.IsolatedValidPisitionsFor(Player, e.Position, _currentCard._cardType);
 
-                    foreach (var position in positions)
+                    foreach (var position in validpositions)
                     {
                         position.Deactivate();
                     }
+
+                    //foreach (var position in IsolatedPositions)
+                    //{
+                    //    position.Deactivate();
+                    //}
+
                 };
 
 
                 var gridpos = _positionHelper.ToGridPosition(_boardParent, hex.transform.position);
-                
+
                 grid.Register((int)gridpos.x, (int)gridpos.y, hex);
-               
+
                 hex.gameObject.name = $"tile {(int)gridpos.x},{(int)gridpos.y}";
             }
         }
 
         private void ConnectPiece(Grid<IHex> grid, Board<IHex, Piece> board)
         {
-                var pieces = FindObjectsOfType<Piece>();
-                foreach (var piece in pieces)
-                {
+            var pieces = FindObjectsOfType<Piece>();
+            foreach (var piece in pieces)
+            {
                 var gridpos = _positionHelper.ToGridPosition(_boardParent, piece.transform.position);
-                    if (grid.TryGetPositionAt((int)gridpos.x, (int)gridpos.y, out var position))
-                    {
-                        Debug.Log("registered");
+                if (grid.TryGetPositionAt((int)gridpos.x, (int)gridpos.y, out var position))
+                {
+                    Debug.Log("registered");
 
 
-                        board.Place(piece, position);
-                    }
+                    board.Place(piece, position);
                 }
             }
+        }
 
-      
+
     }
 
 }

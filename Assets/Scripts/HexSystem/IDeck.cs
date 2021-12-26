@@ -7,15 +7,40 @@ using System.Threading.Tasks;
 namespace DAE.HexSystem
 {
     public interface IDeck<TCard>
-    {
-        int DeckSize { get; }
-        public List<TCard> CardList { get; }
+    {        
         public List<TCard> CurrentDeckList {get;}
         public List<TCard> StartingDecklist { get; }
+        public List<TCard> TemporaryCardsList { get; }
 
-        public void GenerateDeck();
-        public List<TCard> ShuffleDeck();
-        public List<TCard> ReShuffleDeck();
+        //discardPile
+
+
+        public void EqualizeDecks();
+        public List<TCard> ShuffleCurrentDeck();
+
+        //for prototype im working on
+
+        //AddFromDiscardPile
+        //ClearDiscardPile
+        //removeFromDiscardPile (also startingdeck) 
+
+        public List<TCard> ShuffleStartingDeck();
+
+        public void AddCardRandom(TCard newCard);
+        public void AddCardToCurrentDeckRandom(TCard newCard);
+        public void AddCardToStartingDeckRandom(TCard newCard);
+
+        public void AddCardTop(TCard newCard);
+        public void AddCardToCurrentDeckTop(TCard newCard);
+        public void AddCardToStartingDeckTop(TCard newCard);
+
+        public void AddCardBottom(TCard newCard);
+        public void AddCardToCurrentDeckBottom(TCard newCard);
+        public void AddCardToStartingDeckBottom(TCard newCard);
+
+        public void RemoveCard(TCard toRemove);
+        public void RemoveCardFromCurrentDeck(TCard toRemove);      
+
 
     }
 }

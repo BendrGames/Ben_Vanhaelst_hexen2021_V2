@@ -9,11 +9,11 @@ namespace DAE.HexSystem
 {
     public interface IHand<TCard>
     {
-        public int Handsize { get; }
+        //public int Handsize { get; }
 
         public List<TCard> PlayerHandCardList { get; }
         public TCard Drawcard();
-        public List<TCard> DiscardCard();
+        public void DiscardCard(TCard currentcard);
         public void PlayCard();
 
     }

@@ -10,54 +10,52 @@ using DAE.HexSystem;
 
 namespace DAE.Gamesystem
 {
+
+
     public class PlayerHand : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler, IHand<Card>
     {
-        public Deck PlayerDeck;
+        private Deck _playerDeck;
         public GameObject HandView;
 
-        private int _handsize;
+        //private int _handsize;
         public List<Card> _playerHandCardList;
-        public int Handsize => _handsize;
+
+        //public int Handsize => _handsize;
         public List<Card> PlayerHandCardList => _playerHandCardList;
 
-        public void InitializePlayerHand(Deck playerDeck, int handsize)
+        public void InitializePlayerHand(Deck playerDeck)
         {
-            PlayerDeck = playerDeck;
-            PlayerDeck.GenerateDeck();
+            _playerDeck = playerDeck;
+            
+            _playerDeck.EqualizeDecks();
+            _playerDeck.ShuffleCurrentDeck();
 
-            _handsize = handsize;
+            //_handsize = handsize;
 
             
         }
 
         public Card Drawcard()
-        {
-            int randomnum = Random.Range(0, PlayerDeck.CurrentDeckList.Count);
-            _playerHandCardList.Add(PlayerDeck.CurrentDeckList[randomnum]);
-            PlayerDeck.CurrentDeckList.RemoveAt(randomnum);
+        {            
+            _playerHandCardList.Add(_playerDeck.CurrentDeckList[0]);
+            _playerDeck.CurrentDeckList.RemoveAt(0);
             var card = Instantiate(_playerHandCardList[_playerHandCardList.Count - 1], HandView.transform);
 
             return card;
-
         }
-
-        public Card ReAddCard(Card currentcard)
-        {
-            //Card ToInstant = PlayerDeck.CardList.Contains(currentcard);
-            _playerHandCardList.Add(PlayerDeck.CardList[0]);
-            var card = Instantiate(PlayerDeck.CardList[0], HandView.transform);
-            return card;
-
-        }
+                
 
         public void PlayCard()
         {
 
         }
 
-        public List<Card> DiscardCard()
+        public void DiscardCard(Card currentcard)
         {
-            return null;
+            _playerHandCardList.Remove(currentcard);
+
+            //discardpile.add
+            
         }
 
         public void OnPointerEnter(PointerEventData eventData)

@@ -43,11 +43,6 @@ namespace DAE.Gamesystem
         public string Description => _description;
         public Color Color => _CardColor;
 
-        public event EventHandler<CardEventArgs> Clicked;
-        public event EventHandler<CardEventArgs> BeginDrag;
-        public event EventHandler<CardEventArgs> Dragging;
-        public event EventHandler<CardEventArgs> EndDrag;
-        public event EventHandler<CardEventArgs> IDrop;
 
         private void Start()
         {
@@ -56,6 +51,18 @@ namespace DAE.Gamesystem
             TitleText.GetComponent<Text>().text = Name;
             DiscriptionText.GetComponent<Text>().text = _description;
         }
+        public void Used()
+        {
+            //send to discardPile.
+            Destroy(this.gameObject);
+            Destroy(placeholder);
+        }
+       
+        public event EventHandler<CardEventArgs> Clicked;
+        public event EventHandler<CardEventArgs> BeginDrag;
+        public event EventHandler<CardEventArgs> Dragging;
+        public event EventHandler<CardEventArgs> EndDrag;
+        public event EventHandler<CardEventArgs> IDrop;
 
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -130,11 +137,7 @@ namespace DAE.Gamesystem
             OnClicked(this, new CardEventArgs(this));
         }
 
-        public void Used()
-        {
-            Destroy(this.gameObject);
-            Destroy(placeholder);
-        }
+
         protected virtual void OnClicked(object source, CardEventArgs e)
         {
             var handler = Clicked;

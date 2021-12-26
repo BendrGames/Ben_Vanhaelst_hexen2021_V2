@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace DAE.HexSystem.Actions
 {
-
-    class LaserBeamAction<TCard, TPiece> : ActionBase<TCard, TPiece> where TPiece : IPiece where TCard : ICard
-    {             
-
+    class ThunderClapAction<TCard, TPiece> : ActionBase<TCard, TPiece> where TPiece : IPiece where TCard : ICard
+    {
         public override void ExecuteAction(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)
         {
             foreach (var hex in IsolatedPositions(board, grid, position, piece, card))
@@ -27,12 +25,12 @@ namespace DAE.HexSystem.Actions
         public override List<IHex> IsolatedPositions(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)
         {
             ActionHelper<TCard, TPiece> actionHelperPartual = new ActionHelper<TCard, TPiece>(board, grid, position, piece, card);
-            actionHelperPartual.TargettedDirection0(10)
-                        .TargettedDirection1(10)
-                        .TargettedDirection2(10)
-                        .TargettedDirection3(10)
-                        .TargettedDirection4(10)
-                        .TargettedDirection5(10);
+            actionHelperPartual.TargetedPlusSides(1)
+                        .TargetedPlusSides1(1)
+                        .TargetedPlusSides2(1)
+                        .TargetedPlusSides3(1)
+                        .TargetedPlusSides4(1)
+                        .TargetedPlusSides5(1);
 
             return actionHelperPartual.Collect();
         }
@@ -40,14 +38,14 @@ namespace DAE.HexSystem.Actions
         public override List<IHex> Validpositions(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)
         {
             ActionHelper<TCard, TPiece> actionHelper = new ActionHelper<TCard, TPiece>(board, grid, position, piece, card);
-            actionHelper.Direction0(10)
-                        .Direction1(10)
-                        .Direction2(10)
-                        .Direction3(10)
-                        .Direction4(10)
-                        .Direction5(10);
-          
-            return actionHelper.Collect();           
+            actionHelper.Direction0(1)
+                        .Direction1(1)
+                        .Direction2(1)
+                        .Direction3(1)
+                        .Direction4(1)
+                        .Direction5(1);
+
+            return actionHelper.Collect();
 
         }
     }

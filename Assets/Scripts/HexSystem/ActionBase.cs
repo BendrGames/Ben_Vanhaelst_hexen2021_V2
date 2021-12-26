@@ -22,9 +22,9 @@ namespace DAE.HexSystem
             board.Move(piece, position);
         }
 
-        public abstract List<IHex> ValidPositionsCalc(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card);
+        public abstract List<IHex> Validpositions(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card);
 
-     
+        public abstract List<IHex> IsolatedPositions(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card);
 
     }
 }
