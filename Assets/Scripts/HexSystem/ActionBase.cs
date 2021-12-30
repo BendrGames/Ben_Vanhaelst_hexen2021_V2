@@ -1,4 +1,5 @@
 ﻿using DAE.BoardSystem;
+using DAE.ReplaySystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace DAE.HexSystem
 {
     abstract class ActionBase<TCard, TPiece> : ICheckPosition<TCard, TPiece> where TPiece : IPiece where TCard : ICard
     {
+
+        protected ReplayManager ReplayManager;
+
+        protected ActionBase(ReplayManager replayManager)
+        {
+            ReplayManager = replayManager;
+        }
+
         public virtual bool CanExecute(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)
         {
             return true;

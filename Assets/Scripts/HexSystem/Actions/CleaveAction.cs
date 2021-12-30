@@ -1,6 +1,7 @@
 ﻿using DAE.BoardSystem;
 using DAE.HexSystem;
 using DAE.HexSystem.Actions;
+using DAE.ReplaySystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace DAE.HexSystem.Actions
 {
     class CleaveAction<TCard, TPiece> : ActionBase<TCard, TPiece> where TPiece : IPiece where TCard : ICard
     {
+
+        public CleaveAction(ReplayManager replayManager) : base(replayManager)
+        {
+
+        }
+
         public override void ExecuteAction(Board<IHex, TPiece> board, Grid<IHex> grid, IHex hex, TPiece piece, CardType card)
         {
             foreach (var foundhex in IsolatedPositions(board, grid, hex, piece, card))

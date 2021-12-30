@@ -59,6 +59,7 @@ namespace DAE.HexSystem.Actions
             return this;
         }
 
+
         public ActionHelper<TCard, TPiece> StraightAction(int xOffset, int yOffset, int numTiles = int.MaxValue, params Validator[] validators)
         {
             if (!_board.TryGetPositionOf(_piece, out var position))

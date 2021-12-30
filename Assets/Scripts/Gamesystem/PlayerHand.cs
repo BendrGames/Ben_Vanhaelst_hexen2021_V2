@@ -36,12 +36,18 @@ namespace DAE.Gamesystem
         }
 
         public Card Drawcard()
-        {            
-            _playerHandCardList.Add(_playerDeck.CurrentDeckList[0]);
-            _playerDeck.CurrentDeckList.RemoveAt(0);
-            var card = Instantiate(_playerHandCardList[_playerHandCardList.Count - 1], HandView.transform);
+        {
+            if (_playerDeck.CurrentDeckList.Count > 0)
+            {
+                _playerHandCardList.Add(_playerDeck.CurrentDeckList[0]);
+                _playerDeck.CurrentDeckList.RemoveAt(0);
+                var card = Instantiate(_playerHandCardList[_playerHandCardList.Count - 1], HandView.transform);
 
-            return card;
+                return card;
+
+            }
+            return null;
+
         }
                 
 
