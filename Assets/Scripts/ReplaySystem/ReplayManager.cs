@@ -26,7 +26,7 @@ namespace DAE.ReplaySystem
         public void ForwardToEnd()
         {
 
-            //while (Forward()) ;
+            
 
             while (!IsAtEnd)
             {

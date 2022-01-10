@@ -12,8 +12,8 @@ namespace DAE.Gamesystem
 {
 
 
-    public class PlayerHand : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler, IHand<Card>  {
-                                               
+    public class PlayerHand : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+    {        
               
         public void OnPointerEnter(PointerEventData eventData)
         {

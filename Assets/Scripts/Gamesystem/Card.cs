@@ -14,28 +14,24 @@ namespace DAE.Gamesystem
         public CardEventArgs(Card card) => Card = card;
     }
 
-    public class Card : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, ICard
+    public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, ICard
     {
         [SerializeField] private string _name;
-        [SerializeField] private string _description;
-        [SerializeField] private bool _played;
+        [SerializeField] private string _description;      
         [SerializeField] private Texture2D _cardTexture;     
 
-        [SerializeField] public GameObject CardImage;
-        [SerializeField] public GameObject Cardcolour;
+        [SerializeField] public GameObject CardImage;      
         [SerializeField] public GameObject TitleText;
         [SerializeField] public GameObject DiscriptionText;
+        [SerializeField] public CardType _cardType;
 
         public CardData _cardData;
-
-        [SerializeField] public CardType _cardType;
 
         public Transform parentToReturnTo = null;
         public Transform placeholderParent = null;
 
         GameObject placeholder = null;
 
-        public bool Played => _played;
         public string Name => _name;
         public CardType CardType { get; set; }
         public Texture2D CardTexture => _cardTexture;
@@ -65,11 +61,11 @@ namespace DAE.Gamesystem
             Destroy(placeholder);
         }
        
-        public event EventHandler<CardEventArgs> Clicked;
+        
         public event EventHandler<CardEventArgs> BeginDrag;
         public event EventHandler<CardEventArgs> Dragging;
         public event EventHandler<CardEventArgs> EndDrag;
-        public event EventHandler<CardEventArgs> IDrop;
+        
 
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -137,19 +133,7 @@ namespace DAE.Gamesystem
             Destroy(placeholder);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            //zoom in on card
-
-            OnClicked(this, new CardEventArgs(this));
-        }
-
-
-        protected virtual void OnClicked(object source, CardEventArgs e)
-        {
-            var handler = Clicked;
-            handler?.Invoke(this, e);
-        }
+        
         protected virtual void OnBeginDragging(object source, CardEventArgs e)
         {
             var handler = BeginDrag;
@@ -166,11 +150,6 @@ namespace DAE.Gamesystem
             handler?.Invoke(this, e);
         }
 
-        //protected virtual void OnIDrop(object source, CardEventArgs e)
-        //{
-        //    var handler = IDrop;
-        //    handler?.Invoke(this, e);
-        //}
 
     }
 }

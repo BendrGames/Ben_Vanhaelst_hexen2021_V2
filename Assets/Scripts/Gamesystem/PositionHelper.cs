@@ -13,13 +13,7 @@ namespace DAE.Gamesystem
 
     public class PositionHelper : ScriptableObject
     {
-        //private void OnValidate()
-        //{
-        //    if (TileRadius <= 0)
-        //        _tileradius = 1;
-        //}
-
-
+  
         public float TileRadius;
 
         public Vector2 ToGridPosition(Transform parent, Vector3 worldPosition)

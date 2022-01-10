@@ -12,17 +12,14 @@ namespace DAE.GameSystem.GameStates
 {
     class GamePlayState : GameStateBase
     {
-       
+
         private ActionManager<Card, Piece> _actionManager;
         private Board<IHex, Piece> _board;
-        private PlayerHand _playerHand;
-        //private Card _currentCard;
-        
         private Deck _deck;
 
         public GamePlayState(StateMachine<GameStateBase> stateMachine, Board<IHex, Piece> board, ActionManager<Card, Piece> moveManager, PlayerHand playerhand, Deck deck) : base(stateMachine)
         {
-            _playerHand = playerhand;
+
             _deck = deck;
             _actionManager = moveManager;
             _board = board;
@@ -91,11 +88,6 @@ namespace DAE.GameSystem.GameStates
                 _actionManager.Action(piece, position, card._cardType);
 
                 _deck.ExecuteCard(card);
-
-                //_deck.AddToDiscard(card.CardData);
-                //_deck.RemoveFromHand(card.CardData);
-                //card.Used();
-                //_deck.DrawCard();
             }
 
             foreach (var hex in validpositions)

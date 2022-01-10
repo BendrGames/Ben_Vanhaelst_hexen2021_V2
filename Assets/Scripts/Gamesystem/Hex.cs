@@ -37,52 +37,32 @@ namespace DAE.Gamesystem
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.pointerDrag == null)
-                return;
-            Debug.Log("OnPointerEnter");
-
+                return;      
 
             Card d = eventData.pointerDrag.GetComponent<Card>();
-            //if (d != null)
-            //{
-            //    d.placeholderParent = this.transform;
-            //}
-
+        
             OnEntered(new PositionEventArgs(this, d));
 
-            //highlight tiles A groep
+           
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (eventData.pointerDrag == null)
-                return;
-            Debug.Log("OnPointerExit");
+                return;    
 
-
-
-            Card d = eventData.pointerDrag.GetComponent<Card>();
-            //if (d != null && d.placeholderParent == this.transform)
-            //{
-            //    d.placeholderParent = d.parentToReturnTo;
-            //}
+            Card d = eventData.pointerDrag.GetComponent<Card>();      
 
             OnExited(new PositionEventArgs(this, d));
-            //highlight tiles  b goep
+          
         }
 
         public void OnDrop(PointerEventData eventData)
         {
             Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
             Card d = eventData.pointerDrag.GetComponent<Card>();
-            //if (d != null)
-            //{
-            //    d.parentToReturnTo = d.parentToReturnTo;
-            //}
 
-            OnDropped(new PositionEventArgs(this, d));
-
-            //Destroy(eventData.pointerDrag.gameObject);
-
+           OnDropped(new PositionEventArgs(this, d));
 
         }
 

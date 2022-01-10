@@ -59,15 +59,7 @@ namespace DAE.Gamesystem
             _gameStateMachine.Register(GameState.GamePlayState, new GamePlayState(_gameStateMachine, _board, _actionManager, _playerhand, _deckview));
             _gameStateMachine.Register(GameState.ReplayState, new ReplayState(_gameStateMachine, replayManager));
 
-            _gameStateMachine.InitialState = GameState.GamePlayState;
-
-            //_playerhand.InitializePlayerHand(_deckview);
-
-            //DrawCard();
-            //DrawCard();
-            //DrawCard();
-            //DrawCard();
-            //DrawCard();
+            _gameStateMachine.InitialState = GameState.GamePlayState;                    
 
             BoardListereners();
         }

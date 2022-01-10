@@ -12,7 +12,7 @@ namespace DAE.HexSystem
 {
     public class ActionManager<TCard,TPiece> where TPiece : IPiece where TCard : ICard
     {
-        //private MultiValueDictionary<CardType, ICheckPosition> _actions = new MultiValueDictionary<CardType, ICheckPosition>();
+  
         private MultiValueDictionary<CardType, ICheckPosition<TCard, TPiece>> _actions = new MultiValueDictionary<CardType, ICheckPosition<TCard, TPiece>>();
         private readonly Board<IHex, TPiece> _board;
         private readonly Grid<IHex> _grid;
@@ -39,25 +39,9 @@ namespace DAE.HexSystem
 
             _actions.Add(CardType.Teleport, new TeleportAction<TCard, TPiece>(_replayManager));
 
-            _actions.Add(CardType.Push, new CleaveAction<TCard, TPiece>(_replayManager));
-
-
-            //_actions.Add(CardType.Cleave, new ConfigurableAction<TCard, TPiece>((b, g, pos, p, c)
-            //=> new ActionHelper<TCard, TPiece>(b, g, pos, p, c)
-            //                            .Direction0(1)
-            //                            .Direction1(1)
-            //                            .Direction2(1)
-            //                            .Collect()));                  
+            _actions.Add(CardType.Push, new CleaveAction<TCard, TPiece>(_replayManager));                
 
         }
-
-        //public List<Position> ValidPisitionsFor(TPiece piece, CardType card)
-        //{
-        //    return _actions[card]
-        //        .Where(m => m.CanExecute(_board, _grid, piece))
-        //        .SelectMany(m => m.Positions(_board, _grid, piece, position))
-        //        .ToList();
-        //}
 
         public List<IHex> ValidPisitionsFor(TPiece piece, IHex position, CardType cardType)
         {

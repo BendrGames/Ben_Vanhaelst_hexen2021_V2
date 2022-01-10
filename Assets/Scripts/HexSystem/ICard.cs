@@ -17,15 +17,6 @@ namespace DAE.HexSystem
         Texture2D CardTexture { get; }
 
         public void Used();
-
-
-
-        //bool Click { get; }
-
-        //bool Drag { get; }
-
-
-
     }
 
     public enum CardType

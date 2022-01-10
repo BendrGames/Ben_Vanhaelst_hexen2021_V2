@@ -12,22 +12,8 @@ namespace DAE.HexSystem
         public List<TCardData> StartingDecklist { get; }
         public List<TCardData> TemporaryCardsList { get; }
         public List<TCardData> PlayerHandList { get; }
-
-        //discardPile
-
-
         public void EqualizeDecks();
         public List<TCardData> ShuffleCurrentDeck();
-
-        //for prototype im working on
-
-        //AddFromDiscardPile
-        //ClearDiscardPile
-        //removeFromDiscardPile (also startingdeck) 
-
         public List<TCardData> ShuffleStartingDeck();
-
-
-
     }
 }

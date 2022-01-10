@@ -8,6 +8,6 @@ namespace DAE.HexSystem
 {
     public interface IPiece
     {
-        //empty atm
+       
     }
 }

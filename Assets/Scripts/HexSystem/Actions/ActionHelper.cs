@@ -7,19 +7,7 @@ using DAE.BoardSystem;
 namespace DAE.HexSystem.Actions
 {
     class ActionHelper<TCard, TPiece> where TPiece : IPiece where TCard : ICard
-    {
-        //private Board<Position, ICard> _board;
-        //private Grid<Position> _grid;
-        //private ICard _piece;
-
-        //private List<Position> _validPositions = new List<Position>();
-
-        //public ActionHelper(Board<Position, ICard> board, Grid<Position> grid, ICard piece)
-        //{
-        //    _board = board;
-        //    this._piece = piece;
-        //    this._grid = grid;
-        //}
+    {    
 
         private Board<IHex, TPiece> _board;
         private Grid<IHex> _grid;
@@ -38,21 +26,13 @@ namespace DAE.HexSystem.Actions
             this._card = card;
         }
 
-        //public delegate bool Validator(Board<Position, ICard> board, Grid<Position> grid, ICard piece, Position position);
+        
 
         public delegate bool Validator(Board<IHex, TPiece> board, Grid<IHex> grid, TPiece piece, IHex position);
-
-
         public static bool IsEmptyTile(Board<IHex, TPiece> board, Grid<IHex> grid, TPiece piece, IHex position)
         {
             return !board.TryGetPieceAt(position, out _);
-        }
-
-        //public static bool HasEnemyPiece(Board<IHex, TPiece> board, Grid<IHex> grid, TPiece piece, Position position)
-        //{
-        //    return board.TryGetPieceAt(position, out var enemyPiece) && enemyPiece.PlayerID != piece.PlayerID;
-        //}
-
+        }              
         public ActionHelper<TCard, TPiece> SelectSIngle(params Validator[] validators)
         {
             _validPositions.Add(_position);
@@ -81,20 +61,8 @@ namespace DAE.HexSystem.Actions
                 if (!isOk)
                     return this;
 
-                //var hasPiece = _board.TryGetPieceAt(nextPosition, out var nextPiece);
-                //if (!hasPiece)
-                //{
-                _validPositions.Add(nextPosition);
-                //}
-                //else
-                //{
-                //    //detect other pieces shit
-                //    if (nextPiece.PlayerID == _piece.PlayerID)
-                //        return this;
-
-                //    _validPositions.Add(nextPosition);
-                //    return this;
-                //}
+           
+                _validPositions.Add(nextPosition);       
 
                 nextXCoordinate = coordinate.x + ((step + 1) * xOffset);
                 nextYCoordinate = coordinate.y + ((step + 1) * yOffset);

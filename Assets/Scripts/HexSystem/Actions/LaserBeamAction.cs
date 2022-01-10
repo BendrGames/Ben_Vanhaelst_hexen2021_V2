@@ -55,30 +55,6 @@ namespace DAE.HexSystem.Actions
             };
 
 
-            //Action forward = () =>
-            //{
-            //    foreach (var hex in IsolatedPositions(board, grid, position, piece, card))
-            //    {
-            //        if (board.TryGetPieceAt(hex, out var enemy))
-            //        {
-            //            board.Take(enemy);                       
-            //        }
-            //    }
-            //};
-
-            //Action backward = () =>
-            //{
-            //    foreach (var hex in IsolatedPositions(board, grid, position, piece, card))
-            //    {
-            //        if (board.TryGetPieceAt(hex, out var enemy))
-            //        {
-            //            board.Place(enemy, hex);                       
-            //        }
-            //    }
-            //};
-
-
-
             ReplayManager.Execute(new DelegateReplayCommandMove(forward, backward));
         }
 
