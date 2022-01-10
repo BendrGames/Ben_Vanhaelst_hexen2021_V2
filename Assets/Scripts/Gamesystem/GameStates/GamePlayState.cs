@@ -34,6 +34,7 @@ namespace DAE.GameSystem.GameStates
             _deck.DrawCard();
             _deck.DrawCard();
             _deck.DrawCard();
+            _deck.InstantiateHandGOs();
         }
 
 
@@ -89,10 +90,12 @@ namespace DAE.GameSystem.GameStates
             {
                 _actionManager.Action(piece, position, card._cardType);
 
-                _deck.AddToDiscard(card.CardData);
-                _deck.RemoveFromHand(card.CardData);
-                card.Used();
-                _deck.DrawCard();
+                _deck.ExecuteCard(card);
+
+                //_deck.AddToDiscard(card.CardData);
+                //_deck.RemoveFromHand(card.CardData);
+                //card.Used();
+                //_deck.DrawCard();
             }
 
             foreach (var hex in validpositions)

@@ -53,6 +53,7 @@ namespace DAE.Gamesystem
             var replayManager = new ReplayManager();
 
             _actionManager = new ActionManager<Card, Piece>(_board, _grid, replayManager);
+            _deckview.InitiReplayManager(replayManager);
 
             _gameStateMachine = new StateMachine<GameStateBase>();
             _gameStateMachine.Register(GameState.GamePlayState, new GamePlayState(_gameStateMachine, _board, _actionManager, _playerhand, _deckview));
@@ -133,10 +134,7 @@ namespace DAE.Gamesystem
             {
                 var gridpos = _positionHelper.ToGridPosition(_boardParent, piece.transform.position);
                 if (grid.TryGetPositionAt((int)gridpos.x, (int)gridpos.y, out var position))
-                {
-                    Debug.Log("registered");
-
-
+                {                 
                     board.Place(piece, position);
                 }
             }
