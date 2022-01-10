@@ -19,15 +19,14 @@ namespace DAE.Gamesystem
         [SerializeField] private string _name;
         [SerializeField] private string _description;
         [SerializeField] private bool _played;
-        [SerializeField] private Texture2D _cardTexture;
-        [SerializeField] private Color _CardColor;
+        [SerializeField] private Texture2D _cardTexture;     
 
         [SerializeField] public GameObject CardImage;
         [SerializeField] public GameObject Cardcolour;
         [SerializeField] public GameObject TitleText;
         [SerializeField] public GameObject DiscriptionText;
 
-
+        public CardData _cardData;
 
         [SerializeField] public CardType _cardType;
 
@@ -41,16 +40,24 @@ namespace DAE.Gamesystem
         public CardType CardType { get; set; }
         public Texture2D CardTexture => _cardTexture;
         public string Description => _description;
-        public Color Color => _CardColor;
+        public CardData CardData => _cardData;
 
 
-        private void Start()
+
+        public void InitializeCard(CardData data)
         {
-            //Cardcolour.GetComponent<RawImage>().color = _CardColor;
+            _name = data._name;
+            _description = data._description;
+            _cardType = data._cardType;
+            _cardTexture = data._cardTexture;
+            _cardData = data;
+
+
             CardImage.GetComponent<RawImage>().texture = CardTexture;
-            TitleText.GetComponent<Text>().text = Name;
+            TitleText.GetComponent<Text>().text = _name;
             DiscriptionText.GetComponent<Text>().text = _description;
         }
+
         public void Used()
         {
             //send to discardPile.

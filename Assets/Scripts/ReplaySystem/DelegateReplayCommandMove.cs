@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace DAE.ReplaySystem
 {
-    public class DelegateReplayCommand : IReplayableCommand
+    public class DelegateReplayCommandMove : IReplayableCommand
     {
         private Action _forward;
         private Action _backward;
 
-        public DelegateReplayCommand(Action forward, Action backward)
+        public DelegateReplayCommandMove(Action forward, Action backward)
         {
             _forward = forward;
             _backward = backward;

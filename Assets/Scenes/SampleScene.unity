@@ -128,7 +128,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5012365699375524725, guid: 132b311b103eef642a59a2a7157633e0, type: 3}
   m_PrefabInstance: {fileID: 753673266}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 753673267}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0644b64f4849a3b4292492308b6e8c4c, type: 3}
@@ -228,7 +228,7 @@ RectTransform:
   - {fileID: 1762747281}
   - {fileID: 1986757873}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -443,7 +443,7 @@ MonoBehaviour:
   Tileradius: 1
   hex: {fileID: 4540100531835349617, guid: e403a19c5065f964b8c74adb8e675c8f, type: 3}
   MapShape: 0
-  _deckview: {fileID: 517622819}
+  _deckview: {fileID: 1883490415}
   _playerhand: {fileID: 1475949}
   _currentCard: {fileID: 0}
   Player: {fileID: 140012287}
@@ -461,17 +461,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &517622819 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1507591455500561752, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
-  m_PrefabInstance: {fileID: 1568303468}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bac49e2fc06874a48b95c8f9b8bdb739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +655,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 132b311b103eef642a59a2a7157633e0, type: 3}
+--- !u!1 &753673267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5012365699375524723, guid: 132b311b103eef642a59a2a7157633e0, type: 3}
+  m_PrefabInstance: {fileID: 753673266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &949621038
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5448907404536056098, guid: efe0ce36964d82c45a686b3cef18cf46, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5448907404536056098, guid: efe0ce36964d82c45a686b3cef18cf46, type: 3}
       propertyPath: m_LocalPosition.x
@@ -983,32 +977,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156160595}
   m_CullTransparentMesh: 1
---- !u!1001 &1568303468
+--- !u!1001 &1700770150
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1507591455500561752, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
+      propertyPath: CardBase
+      value: 
+      objectReference: {fileID: 107266, guid: 1c2f423ad69ebd9478323b3fe18e3fab, type: 3}
+    - target: {fileID: 1507591455500561752, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
+      propertyPath: HandView
+      value: 
+      objectReference: {fileID: 753673267}
     - target: {fileID: 2888095517391917261, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
       propertyPath: m_Name
       value: Deck
       objectReference: {fileID: 0}
     - target: {fileID: 6547991731972379372, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6547991731972379372, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.379723
       objectReference: {fileID: 0}
     - target: {fileID: 6547991731972379372, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.8859347
       objectReference: {fileID: 0}
     - target: {fileID: 6547991731972379372, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.928339
       objectReference: {fileID: 0}
     - target: {fileID: 6547991731972379372, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1173,6 +1175,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762747280}
   m_CullTransparentMesh: 1
+--- !u!114 &1883490415 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1507591455500561752, guid: 71208e93246985f468bc1a6a766100b4, type: 3}
+  m_PrefabInstance: {fileID: 1700770150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac49e2fc06874a48b95c8f9b8bdb739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1986757872
 GameObject:
   m_ObjectHideFlags: 0

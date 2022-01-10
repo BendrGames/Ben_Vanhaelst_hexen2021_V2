@@ -39,7 +39,7 @@ namespace DAE.HexSystem
 
             _actions.Add(CardType.Teleport, new TeleportAction<TCard, TPiece>(_replayManager));
 
-            _actions.Add(CardType.Cleave, new CleaveAction<TCard, TPiece>(_replayManager));
+            _actions.Add(CardType.Push, new CleaveAction<TCard, TPiece>(_replayManager));
 
 
             //_actions.Add(CardType.Cleave, new ConfigurableAction<TCard, TPiece>((b, g, pos, p, c)

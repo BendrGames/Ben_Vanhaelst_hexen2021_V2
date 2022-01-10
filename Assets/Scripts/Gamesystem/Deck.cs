@@ -9,122 +9,101 @@ namespace DAE.Gamesystem
 {
     
 
-    public class Deck : MonoBehaviour, IDeck<Card>
+    public class Deck : MonoBehaviour, IDeck<CardData>
     {
         //[SerializeField]
         //private int _maxdecksize;
 
         [SerializeField]
-        private List<Card> _currentDeckList;
+        private List<CardData> _currentDeckList;
 
         [SerializeField]
-        private List<Card> _startingDeckList;
+        private List<CardData> _startingDeckList;
         
-        private List<Card> _temporaryCardList;
-      
+        private List<CardData> _temporaryCardList;
+
+        [SerializeField]
+        private List<CardData> _playerhandList;
+
+        [SerializeField]
+        private List<CardData> _discardList;
+
+        [SerializeField]
+        private GameObject CardBase;
+
+        public GameObject HandView;
 
 
         //shuffle shit, generate new deck etc
         //public int DeckSize => _decksize;
-        public List<Card> CurrentDeckList => _currentDeckList;
-        public List<Card> StartingDecklist => _startingDeckList;
-        public List<Card> CardList => _temporaryCardList;
+        public List<CardData> CurrentDeckList => _currentDeckList;
+        public List<CardData> StartingDecklist => _startingDeckList;      
 
-        public List<Card> TemporaryCardsList => throw new System.NotImplementedException();
+        public List<CardData> TemporaryCardsList => _temporaryCardList;
+
+        public List<CardData> PlayerHandList => _playerhandList;
+
+        public List<CardData> DiscardList => _discardList;
+
+        public void DrawCard()
+        {
+            _playerhandList.Add(CurrentDeckList[0]);
+            var card =  Instantiate(CardBase, HandView.transform);
+            card.GetComponent<Card>().InitializeCard(CurrentDeckList[0]);
+            CurrentDeckList.RemoveAt(0);
+            //card.initialize;
+        }
 
         public void EqualizeDecks()        
         {         
             CurrentDeckList.AddRange(StartingDecklist);
         }
-        public List<Card> ShuffleCurrentDeck()
+        public List<CardData> ShuffleCurrentDeck()
         {
             return _currentDeckList.OrderBy(x => Random.value).ToList();
         }
 
         //for prototype im working on
-        public List<Card> ShuffleStartingDeck()
+        public List<CardData> ShuffleStartingDeck()
         {
             return _startingDeckList.OrderBy(x => Random.value).ToList();
         }
 
-
-        public void AddCardRandom(Card newCard)
+        internal void AddToDiscard(CardData cardData)
         {
-            _currentDeckList.Insert(Random.Range(0, _currentDeckList.Count), newCard);
-            _startingDeckList.Insert(Random.Range(0, _startingDeckList.Count), newCard);
+            _discardList.Add(cardData);
         }
-
-        public void AddCardToCurrentDeckRandom(Card newCard)
+        
+        internal void RemoveFromHand(CardData cardData)
         {
-            _currentDeckList.Insert(Random.Range(0, _currentDeckList.Count), newCard);            
+            _playerhandList.Remove(cardData);
         }
 
-        public void AddCardToStartingDeckRandom(Card newCard)
-        {           
-            _startingDeckList.Insert(Random.Range(0, _startingDeckList.Count), newCard);
-        }
-
-        public void AddCardTop(Card newCard)
+        public void CardBackWard()
         {
-            _currentDeckList.Insert(Random.Range(0, _currentDeckList.Count), newCard);
-            _startingDeckList.Insert(Random.Range(0, _startingDeckList.Count), newCard);
+            _playerhandList.Add(_discardList[0]);
+            _currentDeckList.Add(_playerhandList[0]);
+
+            var card = Instantiate(CardBase, HandView.transform);
+            card.GetComponent<Card>().InitializeCard(_discardList[0]);
+
+            _discardList.RemoveAt(_discardList.Count-1);
+            _playerhandList.RemoveAt(_playerhandList.Count - 1);
         }
 
-        public void AddCardToCurrentDeckTop(Card newCard)
+
+        public void CardForward()
         {
-            _currentDeckList.Insert(0, newCard);            
+            _playerhandList.Add(CurrentDeckList[0]);
+            _discardList.Add(PlayerHandList[0]);
+
+            var card = Instantiate(CardBase, HandView.transform);
+            card.GetComponent<Card>().InitializeCard(CurrentDeckList[0]);               
+
+            _currentDeckList.RemoveAt(_currentDeckList.Count -1);
+            _playerhandList.RemoveAt(_playerhandList.Count - 1);
         }
 
-        public void AddCardToStartingDeckTop(Card newCard)
-        {
-            _startingDeckList.Insert(0, newCard);
-        }
-
-        public void AddCardBottom(Card newCard)
-        {
-            _currentDeckList.Insert(_startingDeckList.Count - 1, newCard);
-            _startingDeckList.Insert(_startingDeckList.Count - 1, newCard);
-        }
-
-        public void AddCardToCurrentDeckBottom(Card newCard)
-        {
-            _currentDeckList.Insert(_startingDeckList.Count - 1, newCard);            
-        }
-
-        public void AddCardToStartingDeckBottom(Card newCard)
-        {            
-            _startingDeckList.Insert(_startingDeckList.Count - 1, newCard);
-        }
-
-        public void RemoveCard(Card toRemove)
-        {
-            if (_currentDeckList.Contains(toRemove))
-            {
-                _currentDeckList.Remove(toRemove);
-            }
-
-            if (_startingDeckList.Contains(toRemove))
-            {
-                _startingDeckList.Remove(toRemove);
-            }
-        }
-
-        public void RemoveCardFromCurrentDeck(Card toRemove)
-        {
-            if (_currentDeckList.Contains(toRemove))
-            {
-                _currentDeckList.Remove(toRemove);
-            }           
-        }
-
-        public void RemoveCardFromStartingDeck(Card toRemove)
-        {        
-
-            if (_startingDeckList.Contains(toRemove))
-            {
-                _startingDeckList.Remove(toRemove);
-            }
-        }
     }
 
 

@@ -43,18 +43,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac49e2fc06874a48b95c8f9b8bdb739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _decksize: 0
   _currentDeckList: []
   _startingDeckList:
-  - {fileID: 1617531233405530633, guid: cd158e4f84b2bf244b57f959dc7eb615, type: 3}
-  - {fileID: 1617531233405530633, guid: d6780fc8e57869d4ba2abdf8444f7725, type: 3}
-  - {fileID: 1617531233405530633, guid: da75cc112da7cb5449c3cfb6ab6cc858, type: 3}
-  - {fileID: 1617531233405530633, guid: 67dcd81429478eb43924cf0533ba3a87, type: 3}
-  - {fileID: 1617531233405530633, guid: cd158e4f84b2bf244b57f959dc7eb615, type: 3}
-  - {fileID: 1617531233405530633, guid: d6780fc8e57869d4ba2abdf8444f7725, type: 3}
-  - {fileID: 1617531233405530633, guid: da75cc112da7cb5449c3cfb6ab6cc858, type: 3}
-  - {fileID: 1617531233405530633, guid: 67dcd81429478eb43924cf0533ba3a87, type: 3}
-  - {fileID: 1617531233405530633, guid: cd158e4f84b2bf244b57f959dc7eb615, type: 3}
-  - {fileID: 1617531233405530633, guid: d6780fc8e57869d4ba2abdf8444f7725, type: 3}
-  - {fileID: 1617531233405530633, guid: da75cc112da7cb5449c3cfb6ab6cc858, type: 3}
-  - {fileID: 1617531233405530633, guid: 67dcd81429478eb43924cf0533ba3a87, type: 3}
+  - {fileID: 11400000, guid: 56f7801e53f4f41408409f9f108d4e5f, type: 2}
+  - {fileID: 11400000, guid: 01de615f854ad6944a750aee88a328c6, type: 2}
+  - {fileID: 11400000, guid: 4d13f55b0ccf19c4da34689108f0ba49, type: 2}
+  - {fileID: 11400000, guid: 6489214c13eb0ae4d8c88efa97de0a3c, type: 2}
+  - {fileID: 11400000, guid: 56f7801e53f4f41408409f9f108d4e5f, type: 2}
+  - {fileID: 11400000, guid: 01de615f854ad6944a750aee88a328c6, type: 2}
+  - {fileID: 11400000, guid: 4d13f55b0ccf19c4da34689108f0ba49, type: 2}
+  - {fileID: 11400000, guid: 6489214c13eb0ae4d8c88efa97de0a3c, type: 2}
+  - {fileID: 11400000, guid: 56f7801e53f4f41408409f9f108d4e5f, type: 2}
+  - {fileID: 11400000, guid: 01de615f854ad6944a750aee88a328c6, type: 2}
+  - {fileID: 11400000, guid: 4d13f55b0ccf19c4da34689108f0ba49, type: 2}
+  - {fileID: 11400000, guid: 6489214c13eb0ae4d8c88efa97de0a3c, type: 2}
+  _playerhandList: []
+  CardBase: {fileID: 0}
+  HandView: {fileID: 0}

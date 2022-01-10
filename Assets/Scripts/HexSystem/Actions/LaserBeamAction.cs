@@ -79,7 +79,7 @@ namespace DAE.HexSystem.Actions
 
 
 
-            ReplayManager.Execute(new DelegateReplayCommand(forward, backward));
+            ReplayManager.Execute(new DelegateReplayCommandMove(forward, backward));
         }
 
         public override List<IHex> IsolatedPositions(Board<IHex, TPiece> board, Grid<IHex> grid, IHex position, TPiece piece, CardType card)

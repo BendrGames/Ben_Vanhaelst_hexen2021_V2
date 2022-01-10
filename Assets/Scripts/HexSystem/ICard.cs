@@ -12,9 +12,7 @@ namespace DAE.HexSystem
         string Name { get; }     
         
         string Description { get; }
-
-        Color Color { get; }
-        bool Played { get; }
+   
         CardType CardType { get; }
         Texture2D CardTexture { get; }
 
@@ -34,7 +32,7 @@ namespace DAE.HexSystem
     {
         Teleport,
         Thunderclap,
-        Cleave,
+        Push,
         Beam
     }
 }

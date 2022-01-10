@@ -12,58 +12,9 @@ namespace DAE.Gamesystem
 {
 
 
-    public class PlayerHand : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler, IHand<Card>
-    {
-        private Deck _playerDeck;
-        public GameObject HandView;
-
-        //private int _handsize;
-        public List<Card> _playerHandCardList;
-
-        //public int Handsize => _handsize;
-        public List<Card> PlayerHandCardList => _playerHandCardList;
-
-        public void InitializePlayerHand(Deck playerDeck)
-        {
-            _playerDeck = playerDeck;
-            
-            _playerDeck.EqualizeDecks();
-            _playerDeck.ShuffleCurrentDeck();
-
-            //_handsize = handsize;
-
-            
-        }
-
-        public Card Drawcard()
-        {
-            if (_playerDeck.CurrentDeckList.Count > 0)
-            {
-                _playerHandCardList.Add(_playerDeck.CurrentDeckList[0]);
-                _playerDeck.CurrentDeckList.RemoveAt(0);
-                var card = Instantiate(_playerHandCardList[_playerHandCardList.Count - 1], HandView.transform);
-
-                return card;
-
-            }
-            return null;
-
-        }
-                
-
-        public void PlayCard()
-        {
-
-        }
-
-        public void DiscardCard(Card currentcard)
-        {
-            _playerHandCardList.Remove(currentcard);
-
-            //discardpile.add
-            
-        }
-
+    public class PlayerHand : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler, IHand<Card>  {
+                                               
+              
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Debug.Log("OnPointerEnter");

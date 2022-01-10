@@ -8,7 +8,6 @@ namespace DAE.ReplaySystem
 
     public class ReplayManager
     {
-
         private List<IReplayableCommand> _commands = new List<IReplayableCommand>();
         private int _currentPosition = -1;
 

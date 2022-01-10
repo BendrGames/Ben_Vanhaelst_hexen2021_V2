@@ -54,7 +54,6 @@ namespace DAE.Gamesystem
 
             _actionManager = new ActionManager<Card, Piece>(_board, _grid, replayManager);
 
-
             _gameStateMachine = new StateMachine<GameStateBase>();
             _gameStateMachine.Register(GameState.GamePlayState, new GamePlayState(_gameStateMachine, _board, _actionManager, _playerhand, _deckview));
             _gameStateMachine.Register(GameState.ReplayState, new ReplayState(_gameStateMachine, replayManager));
@@ -114,68 +113,9 @@ namespace DAE.Gamesystem
             foreach (var hex in hexes)
             {
 
-                hex.Dropped += (s, e) => _gameStateMachine.CurrentState.OnDrop(Player, hex);
-                hex.Entered += (s, e) => _gameStateMachine.CurrentState.HighLightNew(Player, hex);
-                hex.Exitted += (s, e) => _gameStateMachine.CurrentState.UnHighlightOld(Player, hex);
-
-                //hex.Dropped += (s, e) =>
-                //{
-                //    var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
-                //    var IsolatedPositions = _actionManager.IsolatedValidPisitionsFor(Player, e.Position, _currentCard._cardType);
-
-                //    if (IsolatedPositions.Contains(e.Position))
-                //    {
-                //        _actionManager.Action(Player, e.Position, _currentCard._cardType);
-
-                //        _currentCard.Used();
-                //        DrawCard();
-                //    }                  
-
-                //    foreach (var position in validpositions)
-                //    {
-                //        position.Deactivate();
-                //    }
-
-                //};
-
-                //hex.Entered += (s, e) =>
-                //{
-                //    var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
-                //    var IsolatedPositions = _actionManager.IsolatedValidPisitionsFor(Player, e.Position, _currentCard._cardType);
-
-                //    if (!validpositions.Contains(e.Position))
-                //    {
-                //        foreach (var position in validpositions)
-                //        {
-                //            position.Activate();
-                //        }
-                //    }
-                    
-                //    if (IsolatedPositions.Contains(e.Position))
-                //    {
-                //        foreach (var position in IsolatedPositions)
-                //        {
-                //            position.Activate();
-                //        }
-                //    }
-                //};
-
-                //hex.Exitted += (s, e) =>
-                //{
-                //    var validpositions = _actionManager.ValidPisitionsFor(Player, e.Position, _currentCard._cardType);
-                //    var IsolatedPositions = _actionManager.IsolatedValidPisitionsFor(Player, e.Position, _currentCard._cardType);
-
-                //    foreach (var position in validpositions)
-                //    {
-                //        position.Deactivate();
-                //    }
-
-                //    //foreach (var position in IsolatedPositions)
-                //    //{
-                //    //    position.Deactivate();
-                //    //}
-
-                //};
+                hex.Dropped += (s, e) => _gameStateMachine.CurrentState.OnDrop(Player, hex, e.Card);
+                hex.Entered += (s, e) => _gameStateMachine.CurrentState.HighLightNew(Player,hex, e.Card);
+                hex.Exitted += (s, e) => _gameStateMachine.CurrentState.UnHighlightOld(Player,hex, e.Card);               
 
 
                 var gridpos = _positionHelper.ToGridPosition(_boardParent, hex.transform.position);

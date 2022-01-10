@@ -26,25 +26,20 @@ namespace DAE.GameSystem.GameStates
         {
         }
 
-        internal virtual void HighLightNew(Piece piece, Hex position)
+        internal virtual void HighLightNew(Piece piece, Hex position, Card card)
         {
 
         }
 
-        internal virtual void UnHighlightOld(Piece piece, Hex position)
+        internal virtual void UnHighlightOld(Piece piece, Hex position, Card card)
         {
 
         }
 
-        internal virtual void OnDrop(Piece piece, Hex position)
+        internal virtual void OnDrop(Piece piece, Hex position, Card card)
         {
 
-        }
-
-        internal virtual void BeginDrag(Card card)
-        {
-
-        }
+        }   
 
 
         internal virtual void Forward()

@@ -13,11 +13,13 @@ namespace DAE.Gamesystem
     public class PositionEventArgs : EventArgs
     {
         public IHex Position { get; }
+        public Card Card { get; }
 
 
-        public PositionEventArgs(IHex position)
+        public PositionEventArgs(IHex position, Card card)
         {
             Position = position;
+            Card = card;
         }
     }
 
@@ -39,13 +41,13 @@ namespace DAE.Gamesystem
             Debug.Log("OnPointerEnter");
 
 
-            //Card d = eventData.pointerDrag.GetComponent<Card>();
+            Card d = eventData.pointerDrag.GetComponent<Card>();
             //if (d != null)
             //{
             //    d.placeholderParent = this.transform;
             //}
 
-            OnEntered(new PositionEventArgs(this));
+            OnEntered(new PositionEventArgs(this, d));
 
             //highlight tiles A groep
         }
@@ -58,26 +60,26 @@ namespace DAE.Gamesystem
 
 
 
-            //Card d = eventData.pointerDrag.GetComponent<Card>();
+            Card d = eventData.pointerDrag.GetComponent<Card>();
             //if (d != null && d.placeholderParent == this.transform)
             //{
             //    d.placeholderParent = d.parentToReturnTo;
             //}
 
-            OnExited(new PositionEventArgs(this));
+            OnExited(new PositionEventArgs(this, d));
             //highlight tiles  b goep
         }
 
         public void OnDrop(PointerEventData eventData)
         {
             Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
-            //Card d = eventData.pointerDrag.GetComponent<Card>();
+            Card d = eventData.pointerDrag.GetComponent<Card>();
             //if (d != null)
             //{
             //    d.parentToReturnTo = d.parentToReturnTo;
             //}
 
-            OnDropped(new PositionEventArgs(this));
+            OnDropped(new PositionEventArgs(this, d));
 
             //Destroy(eventData.pointerDrag.gameObject);
 
